@@ -41,8 +41,7 @@ const Job_Details = () => {
         .then(data => {
             console.log(data)
             if(data.insertedId){
-                navigate('/');
-                // alert("applied")
+                navigate('/jobList');
               }
         })
     }

@@ -26,6 +26,23 @@ const JobList = () => {
             setJobList(data)
         })
     },[user])
+    
+
+    const handleDelete = (id) =>{
+        console.log(id);
+        fetch(`http://localhost:4000/jobDelete/${id}`,{
+            method: "DELETE"
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            if(data.deletedCount > 0){
+                const RemainingData = jobList.filter(item => item._id !== id)
+                setJobList(RemainingData)
+                // alert('Hurray nailed it');
+            }
+        })
+    }
 
     return (
         <>
@@ -72,7 +89,7 @@ const JobList = () => {
                                             </li>
                                             <li className="text-[22px] text-[#FA0606]">
                                                 <Tooltip title="Delete" placement="top">
-                                                   <Link><BsTrash3 /></Link>
+                                                   <button onClick={() => handleDelete(data._id)}><BsTrash3 /></button>
                                                 </Tooltip>     
                                             </li>
                                         </ul>
