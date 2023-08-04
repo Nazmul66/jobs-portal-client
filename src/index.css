@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    /* font-family: 'Inter', sans-serif;
+    font-family: 'Noto Sans', sans-serif;
+     */
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+}
+h5{
+    font-family: 'Noto Sans Hebrew', sans-serif;
+    font-size: 30px; 
+    font-weight: 800; 
+    color: #338573;
+}
+

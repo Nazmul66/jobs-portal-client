@@ -1,0 +1,13 @@
+.banner-section{
+    background: url("/public/assets/Image-Banner.png");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media (min-width: 320px) and (max-width: 576px){
+    .banner-section{
+        background: #EFF6F2;
+        background-size: cover;
+    }
+}
