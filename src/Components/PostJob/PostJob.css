@@ -1,0 +1,12 @@
+.selects{
+    position: relative;
+}
+.arrow{
+    position: absolute;
+    content: "";
+    top: 50%;
+    right: 20px;
+    color: #000;
+    transform: translateY(-50%);
+    pointer-events: none;
+}

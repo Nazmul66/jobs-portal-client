@@ -36,7 +36,7 @@ const Header = () => {
                         </li>
                         <li>
                             {
-                                user ?  <Button variant="contained" color="success">Post a job</Button> :  <Link to="/register">Register</Link>
+                                user ? <Link to="/postJob"><Button variant="contained" color="success">Post a job</Button></Link> : <Link to="/register">Register</Link>
                             }  
                             
                         </li>
