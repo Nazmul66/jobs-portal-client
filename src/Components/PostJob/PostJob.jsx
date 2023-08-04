@@ -41,7 +41,7 @@ const PostJob = () => {
        }
        console.log(formData);
 
-       fetch("http://localhost:5000/jobData", {
+       fetch("http://localhost:4000/jobPost", {
           method: "POST",
           headers: {
               "content-type": "application/json"

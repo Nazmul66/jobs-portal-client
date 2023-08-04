@@ -1,13 +1,16 @@
 import { Button } from "@mui/material";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Job_Details = () => {
+    const navigate = useNavigate();
+    const { user } = useContext(AuthContext)
     const [jobs, setJobs] = useState({});
     const { id } = useParams();
 
     useEffect(() =>{
-        fetch(`http://localhost:5000/jobData/${id}`)
+        fetch(`http://localhost:4000/jobData/${id}`)
         .then(res => res.json())
         .then(data => {
             console.log(data)
@@ -15,8 +18,34 @@ const Job_Details = () => {
         })
     },[id])
 
-    const {company_website, qualification, Experience, Location, Deadline, Salary, Job_Description, Responsibility, position, time, company, Experience_level} = jobs;
+    const { _id, company_website, qualification, Experience, Location, post_Date, Salary, Job_Description, Responsibility, position, time, company, Experience_level} = jobs;
     // console.log(Responsibility);
+
+    const applyJob = () =>{
+        const applyData = {
+            Title: position,
+            job_type: time,
+            Post_Date: post_Date,
+            Experience,
+            jobId : _id,
+            Email : user?.email || "Unknown@gmail.com"
+        }
+        fetch(`http://localhost:4000/jobApply`,{
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(applyData) 
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            if(data.insertedId){
+                navigate('/');
+                // alert("applied")
+              }
+        })
+    }
 
     return (
         <>
@@ -33,7 +62,7 @@ const Job_Details = () => {
                                <Button variant="outlined" color="success" size="large">View Company</Button>
                             </a>
                             <div className="ml-5">
-                                <Button variant="contained" color="success" size="large" >Apply This Job</Button>
+                                <Button variant="contained" color="success" size="large" onClick={ applyJob }>Apply This Job</Button>
                             </div>
                         </div>
 
@@ -42,7 +71,7 @@ const Job_Details = () => {
                        <h3 className="text-[20px] font-semibold text-[#000] mb-4">Experience Level: <span className="text-[16px] font-normal text-[#000]">{Experience_level}</span></h3>
                        <h3 className="text-[20px] font-semibold text-[#000] mb-4">Experience Length: <span className="text-[16px] font-normal text-[#000]">{Experience} Years</span></h3>
                        <h3 className="text-[20px] font-semibold text-[#000] mb-4">Location: <span className="text-[16px] font-normal text-[#000] ">{Location}</span></h3>
-                       <h3 className="text-[20px] font-semibold text-[#000] mb-4">Application Deadline: <span className="text-[16px] font-normal text-[#000] ">{Deadline}</span></h3>
+                       <h3 className="text-[20px] font-semibold text-[#000] mb-4">Application Post Date: <span className="text-[16px] font-normal text-[#000] ">{post_Date}</span></h3>
                        <h3 className="text-[20px] font-semibold text-[#000] mb-4">Salary Range: <span className="text-[16px] font-normal text-[#000] ">({Salary}) TK.</span></h3>
                     </div>
 

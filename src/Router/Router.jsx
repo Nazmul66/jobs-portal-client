@@ -6,6 +6,7 @@ import Home from "../Pages/Home/Home";
 import Job_Details from "../Components/Job_Details/Job_Details";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 import PostJob from "../Components/PostJob/PostJob";
+import JobList from "../Components/JobList/JobList";
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
          {
             path: "/postJob",
             element: <PrivateRoutes><PostJob></PostJob></PrivateRoutes>
+         },
+         {
+            path: "/jobList",
+            element: <PrivateRoutes><JobList></JobList></PrivateRoutes>
          },
          {
             path: '/login',

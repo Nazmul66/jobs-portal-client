@@ -38,8 +38,10 @@ const Header = () => {
                             {
                                 user ? <Link to="/postJob"><Button variant="contained" color="success">Post a job</Button></Link> : <Link to="/register">Register</Link>
                             }  
-                            
                         </li>
+                        {
+                            user && <li><Link to="/jobList"><Button variant="contained" color="success">Job List</Button></Link></li>
+                        }
                     </ul>
                 </nav>
                 {
