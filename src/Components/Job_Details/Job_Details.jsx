@@ -42,7 +42,10 @@ const Job_Details = () => {
             console.log(data)
             if(data.insertedId){
                 navigate('/jobList');
-              }
+            }
+            else{
+                navigate('/jobList');
+            }
         })
     }
 
@@ -57,9 +60,9 @@ const Job_Details = () => {
             <div className="py-10 px-5">
                 <div className="max-w-[1140px] mx-auto">
                         <div className="flex items-center justify-center mb-5">
-                            <a href={`${company_website}`}>
-                               <Button variant="outlined" color="success" size="large">View Company</Button>
-                            </a>
+                              <a href={`${company_website}`}>
+                                 <Button variant="outlined" color="success" size="large">View Company</Button>
+                              </a>
                             <div className="ml-5">
                                 <Button variant="contained" color="success" size="large" onClick={ applyJob }>Apply This Job</Button>
                             </div>
