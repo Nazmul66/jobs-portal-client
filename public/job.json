@@ -3,52 +3,31 @@
         "position": "Laravel Developer",
         "time": "Full Time",
         "company": "Omikron Technologies Private Limited",
-        "company-website": "http://www.omikron.in/",
+        "company_website": "http://www.omikron.in/",
         "image": "https://i.ibb.co/KVBJMfQ/Blu-Bird-Interactive-Ltd.jpg",
         "qualification": "Bachelor",
         "Experience": 2,
-        "Working-Day": "Monday To Saturday ( Sunday off )",
+        "Working": "Monday To Saturday ( Sunday off )",
         "Location": "San Francisco, USA",
-        "Salary-Range": "$ 105,000 - 150,000",
+        "Salary": "$ 105,000 - 150,000",
         "Deadline": "12/08/2023",
-        "Job Description": "Omikron Technologies Private Limited is a software company based in San Francisco, USA.We specialize in developing and deploying business applications for various industry verticals. Established in 2010, we provide various software-related services like research, consulting, custom application development, software implementation, etc. Our services and solutions span across industries like financial services, retail sector, service sector, education, etc. We develop various kinds of custom software (business solutions) for various industry verticals like the finance sector, service sector, retail sector, and manufacturing sector. We aim at providing powerful solutions to various challenging scenarios to the customer, hence enabling them to leverage their business management scope. We have clients across the globe in countries like the US, UK, Spain, Italy, India, and Australia.",
-        "Responsibility": [
-            "Must have strong experience in RESTful web service development using Laravel.",
-            "Develop Custom components.",
-            "Able to work out on an ongoing project.",
-            "Ensure that you have experience in API Integration.",
-            "Able to handle multiple work at a time and work under pressure.",
-            "Work as a team player.",
-            "Able to work with VueJS.",
-            "AWS apps deployment is a plus point.",
-            "Should have sound knowledge in HTML, CSS, and JavaScript.",
-            "Should have sound knowledge of Bootstrap / Responsive design.",
-            "Should have good knowledge of jQuery, AJAX, VueJS",
-            "Should have knowledge of Git & Version control.",
-            "Should have Strong knowledge in PHP, OOP, and SQL.",
-            "Any other tasks by management"
-        ]
+        "Job_Description": "Omikron Technologies Private Limited is a software company based in San Francisco, USA.We specialize in developing and deploying business applications for various industry verticals. Established in 2010, we provide various software-related services like research, consulting, custom application development, software implementation, etc. Our services and solutions span across industries like financial services, retail sector, service sector, education, etc. We develop various kinds of custom software (business solutions) for various industry verticals like the finance sector, service sector, retail sector, and manufacturing sector. We aim at providing powerful solutions to various challenging scenarios to the customer, hence enabling them to leverage their business management scope. We have clients across the globe in countries like the US, UK, Spain, Italy, India, and Australia.",
+        "Responsibility": "1)Must have strong experience in RESTful web service development using Laravel. 2) Develop Custom components. 3)Able to work out on an ongoing project. 4)Ensure that you have experience in API Integration. 5)Able to handle multiple work at a time and work under pressure. 6)Work as a team player. 7)Able to work with VueJS. 8)AWS apps deployment is a plus point. 9)Should have sound knowledge in HTML, CSS, and JavaScript. 10)Should have sound knowledge of Bootstrap / Responsive design. 11)Should have good knowledge of jQuery, AJAX, VueJS. 12)Should have knowledge of Git & Version control. 13)Should have Strong knowledge in PHP, OOP, and SQL. 14)Any other tasks by management."
     },
     {
         "position": "React.Js Developer",
         "time": "Full Time / Part Time",
         "company": "BluBird Interactive Ltd",
-        "company-website": "https://blubirdinteractive.com/",
+        "company_website": "https://blubirdinteractive.com/",
         "image": "https://i.ibb.co/ZKPzDbS/Omikron-Technologies-Private-Limited.jpg",
         "qualification": "C.S.E",
         "Experience": 1,
-        "Working-Day": "Monday To Friday ( Saturday & Sunday off )",
+        "Working": "Monday To Friday ( Saturday & Sunday off )",
         "Location": "Dhaka, Bangladesh",
-        "Salary-Range": "65K - 75K / Month.",
+        "Salary": "65K - 75K / Month.",
         "Deadline": "13/08/2023",
-        "Job Description": "BluBird Interactive Ltd. is seeking a highly skilled and motivated Mid-level Front-End Engineer to join our team full time. This is a remote position ( We have regular meet up & sometimes physical meeting may required) . As a Mid-Senior Front-End Engineer, you will play a crucial role in our projects, focusing on quality assurance and process improvement.",
-        "Responsibility": [
-            "Proven expertise in front-end development, specifically with React and Next.js.",
-            "Strong architecture skills with the ability to design scalable and efficient solutions.",
-            "Experience optimizing applications for fast loading, including image optimization techniques.",
-            "Proficient in API integration, storage systems, and working with image-centric applications.",
-            "Ability to validate team members' work, provide feedback, and maintain high-quality standards."
-        ]
+        "Job_Description": "BluBird Interactive Ltd. is seeking a highly skilled and motivated Mid-level Front-End Engineer to join our team full time. This is a remote position ( We have regular meet up & sometimes physical meeting may required) . As a Mid-Senior Front-End Engineer, you will play a crucial role in our projects, focusing on quality assurance and process improvement.",
+        "Responsibility": "1)Proven expertise in front-end development, specifically with React and Next.js. 2)Strong architecture skills with the ability to design scalable and efficient solutions. 3)Experience optimizing applications for fast loading, including image optimization techniques. 4)Proficient in API integration, storage systems, and working with image-centric applications. 5)Ability to validate team members' work, provide feedback, and maintain high-quality standards."
     }
         
 ]
