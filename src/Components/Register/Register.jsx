@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
+import { updateProfile } from "firebase/auth";
 
 
 const Register = () => {
@@ -12,11 +14,12 @@ const Register = () => {
       event.preventDefault();
       const name = event.target.username.value;
       const email = event.target.email.value;
+      const image = event.target.image.value;
       const pass = event.target.password.value;
       const formData = { name, email, pass}
       console.log(formData)
 
-      if(name === "" || email === "" || pass === "" ){
+      if(name === "" || email === "" || image === "" || pass === "" ){
           return setError("!!! Please fill Up Empty Form Box !!!");
        }
        else if(pass.length < 6){
@@ -37,10 +40,39 @@ const Register = () => {
       createUser(email, pass)
       .then( result =>{
           const users = result.user;
-          console.log(users);
-          event.target.reset();
-          navigate("/login")
-      })
+          console.log(users)
+          updateProfile(result.user, {
+            displayName: name,
+            photoURL : image,
+          })
+          .then(() =>{
+            const userInfo = {
+                 name : name || "unknown name" ,
+                 email : email,
+                 image : image
+              }
+                Swal.fire({
+                icon: 'success',
+                title: 'Register Successfully',
+                })
+
+            fetch(`http://localhost:4000/userData`,{
+                method: "POST",
+                headers: {
+                    "content-type" : "application/json"
+                },
+                body: JSON.stringify(userInfo)
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
+
+                navigate("/login")
+          })
+
+        })
+
       .catch(error =>{
         console.log(error.message)
         setError(error.message)
@@ -65,6 +97,10 @@ const Register = () => {
                         <div className="mb-3">
                             <label htmlFor="" className="block font-medium text-[20px] mb-3">Email Address</label>
                             <input type="email" name="email" placeholder="Email *" className="w-full outline-none border-[1px] border-[#D6D6D6] rounded-md px-6 py-2" />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="" className="block font-medium text-[20px] mb-3">Image </label>
+                            <input type="text" name="image" placeholder="Image URL *" className="w-full outline-none border-[1px] border-[#D6D6D6] rounded-md px-6 py-2" />
                         </div>
                         <div className="mb-6">
                             <label htmlFor="" className="block font-medium text-[20px] mb-3">Password</label>

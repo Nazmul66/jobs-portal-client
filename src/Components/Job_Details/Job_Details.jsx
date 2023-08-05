@@ -2,23 +2,25 @@ import { Button } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Job_Details = () => {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext)
     const [jobs, setJobs] = useState({});
     const { id } = useParams();
+    // console.log(id)
 
     useEffect(() =>{
         fetch(`http://localhost:4000/jobData/${id}`)
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             setJobs(data)
         })
     },[id])
 
-    const { _id, company_website, qualification, Experience, Location, post_Date, Salary, Job_Description, Responsibility, position, time, company, Experience_level} = jobs;
+    const { _id, company_website, qualification, Experience, Location, post_Date, Salary, Job_Description, Responsibility, position, time, company, Experience_level } = jobs;
     // console.log(Responsibility);
 
     const applyJob = () =>{
@@ -42,6 +44,13 @@ const Job_Details = () => {
             console.log(data)
             if(data.insertedId){
                 navigate('/jobList');
+                Swal.fire({
+                    position: 'center-center',
+                    icon: 'success',
+                    title: 'Job applied successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
             }
             else{
                 navigate('/jobList');

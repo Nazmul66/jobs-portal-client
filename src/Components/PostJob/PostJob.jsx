@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import './PostJob.css'
 import { IoIosArrowDown } from 'react-icons/io';
+import Swal from 'sweetalert2';
 
 const PostJob = () => {
      const navigate = useNavigate();
@@ -52,8 +53,11 @@ const PostJob = () => {
        .then(data => {
           console.log(data);
           if(data.insertedId){
-            // alert('');
             navigate('/');
+            Swal.fire({
+                icon: 'success',
+                title: 'A new job post has been Successfully',
+            })
           }
        })
 

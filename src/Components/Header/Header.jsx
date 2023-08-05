@@ -5,6 +5,7 @@ import './Header.css'
 import { useContext, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { Button } from "@mui/material";
+import Swal from "sweetalert2";
 
 const Header = () => {
     const { user, userLogOut } = useContext(AuthContext);
@@ -13,7 +14,10 @@ const Header = () => {
     const LogOutForm = () =>{
         userLogOut()
         .then(() =>{
-            // console.log("SignOut Successfully")
+            Swal.fire({
+                icon: 'success',
+                title: 'Logout Successfully',
+            })
         })
         .catch(error =>{
             console.log(error.message)

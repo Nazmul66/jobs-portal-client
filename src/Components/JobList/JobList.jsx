@@ -12,6 +12,7 @@ import { AiOutlineEye } from 'react-icons/ai';
 import { BiPencil } from 'react-icons/bi';
 import { BsTrash3 } from 'react-icons/bs';
 import { Tooltip } from "@mui/material";
+import Swal from "sweetalert2";
 
 
 const JobList = () => {
@@ -22,26 +23,42 @@ const JobList = () => {
         fetch(`http://localhost:4000/JobList?email=${user?.email}`)
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             setJobList(data)
         })
     },[user])
     
 
     const handleDelete = (id) =>{
-        console.log(id);
-        fetch(`http://localhost:4000/jobDelete/${id}`,{
-            method: "DELETE"
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            if(data.deletedCount > 0){
-                const RemainingData = jobList.filter(item => item._id !== id)
-                setJobList(RemainingData)
-                // alert('Hurray nailed it');
+        Swal.fire({
+            title: 'Are you sure? Do you want to delete it!',
+            // text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:4000/jobDelete/${id}`,{
+                    method: "DELETE"
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if(data.deletedCount > 0){
+                        const RemainingData = jobList.filter(item => item._id !== id)
+                        setJobList(RemainingData)
+                    }
+                    Swal.fire(
+                        'Deleted!',
+                        'Your Data has been deleted.',
+                        'success'
+                      )
+                })
             }
-        })
+          })
+
     }
 
     return (

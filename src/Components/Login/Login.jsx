@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { FcGoogle } from 'react-icons/fc';
+import Swal from "sweetalert2";
 
 const Login = () => {
     const { signInUser, googleInUser } = useContext(AuthContext);
@@ -26,8 +27,29 @@ const Login = () => {
        signInUser(email, pass)
        .then(result =>{
            const user = result.user;
+           const userInfo = {
+              name : "unknown name",
+              email : user?.email
+           }
            console.log(user)
         //    navigate(from, { replace : true });
+            Swal.fire({
+                icon: 'success',
+                title: 'Login Successfully',
+            })
+
+            fetch(`http://localhost:4000/userData`,{
+                method: "POST",
+                headers: {
+                    "content-type" : "application/json"
+                },
+                body: JSON.stringify(userInfo)
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
+
           navigate("/")
        })
        .catch(error =>{
@@ -40,8 +62,29 @@ const Login = () => {
         googleInUser()
         .then(result =>{
             const user = result.user;
+            const userInfo = {
+                name : user?.displayName || "unknown name",
+                email : user?.email || "unknown@BiLogoGmail.com",
+                image : user?.photoURL
+            }
             console.log(user);
-            // navigate(from, { replace : true });
+            Swal.fire({
+                icon: 'success',
+                title: 'Login Successfully',
+              })
+
+            fetch(`http://localhost:4000/userData`,{
+                method: "POST",
+                headers: {
+                    "content-type" : "application/json"
+                },
+                body: JSON.stringify(userInfo)
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
+
             navigate("/")
         })
         .catch(error =>{
