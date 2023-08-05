@@ -1,16 +1,18 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { IoIosArrowDown } from 'react-icons/io';
 import { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 
 const EditJobPost = () => {
+    const navigate = useNavigate();
     const [update, setUpdate] = useState([]);
     const { id } = useParams();
 
      useEffect(() =>{
-        fetch(`http://localhost:4000/updateData/${id}`)
+        fetch(`https://jobs-portal-server-iota.vercel.app/updateData/${id}`)
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             setUpdate(data);
         })
      },[id])
@@ -51,9 +53,9 @@ const EditJobPost = () => {
            Job_Description  :  description,
            Responsibility   :  responsibility
         }
-        console.log(formData);
+        // console.log(formData);
 
-        fetch(`http://localhost:4000/updatePost/${_id}`,{
+        fetch(`https://jobs-portal-server-iota.vercel.app/updatePost/${_id}`,{
             method: "PUT",
             headers: {
                 "content-type": "application/json"
@@ -63,6 +65,13 @@ const EditJobPost = () => {
          .then(res => res.json())
          .then(data => {
             console.log(data)
+            if(data.modifiedCount > 0){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Update Successfully',
+                  })
+                  navigate("/");
+            }
          })
     }
 

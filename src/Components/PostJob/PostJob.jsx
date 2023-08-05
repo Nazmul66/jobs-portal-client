@@ -42,7 +42,7 @@ const PostJob = () => {
        }
        console.log(formData);
 
-       fetch("http://localhost:4000/jobPost", {
+       fetch("https://jobs-portal-server-iota.vercel.app/jobPost", {
           method: "POST",
           headers: {
               "content-type": "application/json"

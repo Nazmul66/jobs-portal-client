@@ -56,7 +56,7 @@ const Register = () => {
                 title: 'Register Successfully',
                 })
 
-            fetch(`http://localhost:4000/userData`,{
+            fetch(`https://jobs-portal-server-iota.vercel.app/userData`,{
                 method: "POST",
                 headers: {
                     "content-type" : "application/json"

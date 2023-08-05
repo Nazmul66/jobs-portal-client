@@ -12,7 +12,7 @@ const Job_Details = () => {
     // console.log(id)
 
     useEffect(() =>{
-        fetch(`http://localhost:4000/jobData/${id}`)
+        fetch(`https://jobs-portal-server-iota.vercel.app/jobData/${id}`)
         .then(res => res.json())
         .then(data => {
             // console.log(data)
@@ -32,7 +32,7 @@ const Job_Details = () => {
             jobId : _id,
             Email : user?.email || "Unknown@gmail.com"
         }
-        fetch(`http://localhost:4000/jobApply`,{
+        fetch(`https://jobs-portal-server-iota.vercel.app/jobApply`,{
             method: "POST",
             headers: {
                 "content-type": "application/json"

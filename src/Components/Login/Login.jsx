@@ -33,7 +33,7 @@ const Login = () => {
            console.log(user)
         //    navigate(from, { replace : true });
 
-            fetch("http://localhost:4000/userData",{
+            fetch("https://jobs-portal-server-iota.vercel.app/userData",{
                 method: "POST",
                 headers: {
                     "content-type" : "application/json"
@@ -72,7 +72,7 @@ const Login = () => {
                 title: 'Login Successfully',
               })
 
-            fetch(`http://localhost:4000/userData`,{
+            fetch(`https://jobs-portal-server-iota.vercel.app/userData`,{
                 method: "POST",
                 headers: {
                     "content-type" : "application/json"

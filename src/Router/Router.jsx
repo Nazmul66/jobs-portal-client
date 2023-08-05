@@ -8,12 +8,13 @@ import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 import PostJob from "../Components/PostJob/PostJob";
 import JobList from "../Components/JobList/JobList";
 import EditJobPost from "../Components/EditJobPost/EditJobPost";
+import ErrorPage from "../Components/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
     {
       path: "/",
       element: <Main />,
-      errorElement: <div>hello world</div>,
+      errorElement: <ErrorPage></ErrorPage>,
       children: [
          {
             path: '/',

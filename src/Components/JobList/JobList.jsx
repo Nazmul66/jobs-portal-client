@@ -21,7 +21,7 @@ const JobList = () => {
     const [jobList, setJobList] = useState([]);
     
     useEffect(() =>{
-        fetch(`http://localhost:4000/JobList?email=${user?.email}`,{
+        fetch(`https://jobs-portal-server-iota.vercel.app/JobList?email=${user?.email}`,{
             method: "GET",
             headers: {
                 authorization : `Bearer ${localStorage.getItem('access-token')}`
@@ -58,7 +58,7 @@ const JobList = () => {
             confirmButtonText: 'Delete it!'
           }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:4000/jobDelete/${id}`,{
+                fetch(`https://jobs-portal-server-iota.vercel.app/jobDelete/${id}`,{
                     method: "DELETE"
                 })
                 .then(res => res.json())

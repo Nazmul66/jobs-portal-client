@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
                     const userInfo = {
                         email : userChange?.email
                     }
-                    fetch(`http://localhost:4000/jwt`,{
+                    fetch(`https://jobs-portal-server-iota.vercel.app/jwt`,{
                         method: "POST",
                         headers: {
                             "content-type" : "application/json"
@@ -74,7 +74,6 @@ const AuthProvider = ({ children }) => {
        userLogOut,
        loading
    }
-
 
 
     return (

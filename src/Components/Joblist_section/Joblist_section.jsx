@@ -10,7 +10,7 @@ const Joblist_section = () => {
     const [jobs, setJobs] = useState([]);
 
     useEffect(() =>{
-        fetch("http://localhost:4000/jobData")
+        fetch("https://jobs-portal-server-iota.vercel.app/jobData")
         .then(res => res.json())
         .then(data => {
             // console.log(data)
