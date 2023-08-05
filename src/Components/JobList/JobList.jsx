@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEye } from 'react-icons/ai';
 import { BiPencil } from 'react-icons/bi';
 import { BsTrash3 } from 'react-icons/bs';
@@ -16,15 +16,33 @@ import Swal from "sweetalert2";
 
 
 const JobList = () => {
-    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const { user, userLogOut } = useContext(AuthContext);
     const [jobList, setJobList] = useState([]);
     
     useEffect(() =>{
-        fetch(`http://localhost:4000/JobList?email=${user?.email}`)
+        fetch(`http://localhost:4000/JobList?email=${user?.email}`,{
+            method: "GET",
+            headers: {
+                authorization : `Bearer ${localStorage.getItem('access-token')}`
+            }
+        })
         .then(res => res.json())
         .then(data => {
-            // console.log(data)
-            setJobList(data)
+            console.log(data)
+            if(!data.error){
+                setJobList(data)
+            }
+            else{
+                userLogOut()
+                .then(() =>{
+                    localStorage.removeItem("access-token");
+                    navigate("/login")
+                })
+                .catch(error =>{
+                    console.log(error.message)
+                })
+            }
         })
     },[user])
     

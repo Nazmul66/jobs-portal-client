@@ -28,17 +28,25 @@ const Login = () => {
        .then(result =>{
            const user = result.user;
            const userInfo = {
-              name : "unknown name",
               email : user?.email
            }
            console.log(user)
         //    navigate(from, { replace : true });
-            Swal.fire({
-                icon: 'success',
-                title: 'Login Successfully',
+
+            fetch(`http://localhost:4000/jwt`,{
+                method: "POST",
+                headers: {
+                    "content-type" : "application/json"
+                },
+                body: JSON.stringify(userInfo)
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log("get jwt token",data);
+                localStorage.setItem("access-token", data.token)
             })
 
-            fetch(`http://localhost:4000/userData`,{
+            fetch("http://localhost:4000/userData",{
                 method: "POST",
                 headers: {
                     "content-type" : "application/json"
@@ -50,7 +58,11 @@ const Login = () => {
                 console.log(data)
             })
 
-          navigate("/")
+            Swal.fire({
+                icon: 'success',
+                title: 'Login Successfully',
+            })
+           navigate("/")
        })
        .catch(error =>{
           console.log(error.message)
