@@ -40,9 +40,29 @@ const AuthProvider = ({ children }) => {
         const unSubscribe = onAuthStateChanged(auth, (userChange) =>{
             setLoading(false)
             setUser(userChange);
+                if(userChange?.email && userChange){
+                    const userInfo = {
+                        email : userChange?.email
+                    }
+                    fetch(`http://localhost:4000/jwt`,{
+                        method: "POST",
+                        headers: {
+                            "content-type" : "application/json"
+                        },
+                        body: JSON.stringify(userInfo)
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        // console.log("get jwt token",data);
+                        localStorage.setItem("access-token", data.token)
+                    })
+                }
+                else{
+                    localStorage.removeItem("access-token");
+                }
         })
         return () =>{
-        return unSubscribe();
+               return unSubscribe();
         }
         },[auth])
 

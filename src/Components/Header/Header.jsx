@@ -18,7 +18,6 @@ const Header = () => {
                 icon: 'success',
                 title: 'Logout Successfully',
             })
-            localStorage.removeItem("access-token");
         })
         .catch(error =>{
             console.log(error.message)

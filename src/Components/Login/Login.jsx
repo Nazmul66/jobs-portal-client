@@ -33,19 +33,6 @@ const Login = () => {
            console.log(user)
         //    navigate(from, { replace : true });
 
-            fetch(`http://localhost:4000/jwt`,{
-                method: "POST",
-                headers: {
-                    "content-type" : "application/json"
-                },
-                body: JSON.stringify(userInfo)
-            })
-            .then(res => res.json())
-            .then(data => {
-                console.log("get jwt token",data);
-                localStorage.setItem("access-token", data.token)
-            })
-
             fetch("http://localhost:4000/userData",{
                 method: "POST",
                 headers: {

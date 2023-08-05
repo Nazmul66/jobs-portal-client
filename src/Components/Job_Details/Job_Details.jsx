@@ -60,7 +60,7 @@ const Job_Details = () => {
 
     return (
         <>
-            <div className="text-center py-5 bg-[#F4F5F7]">
+            <div className="text-center py-5 px-5 bg-[#F4F5F7]">
                 <h2 className="font-medium text-[20px]">
                     {position}({time}) - {company}
                 </h2>

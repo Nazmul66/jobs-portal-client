@@ -27,12 +27,13 @@ nav ul li{
         background: #EFF6F2;
         clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
         transition: all 0.3s ease-in-out;
+        z-index: 100;
     }
     .nav.active{
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
     }
     nav ul{
-
+      text-align: center;
     }
     nav ul li{
         list-style: none;

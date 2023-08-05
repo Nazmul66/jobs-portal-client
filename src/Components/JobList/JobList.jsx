@@ -37,14 +37,14 @@ const JobList = () => {
                 userLogOut()
                 .then(() =>{
                     localStorage.removeItem("access-token");
-                    navigate("/login")
+                    navigate("/login");
                 })
                 .catch(error =>{
                     console.log(error.message)
                 })
             }
         })
-    },[user])
+    },[user, navigate, userLogOut])
     
 
     const handleDelete = (id) =>{
@@ -119,7 +119,7 @@ const JobList = () => {
                                             </li>
                                             <li className="mr-4 text-[22px] text-[#04BCF6]">
                                                 <Tooltip title="Edit" placement="top">
-                                                     <Link><BiPencil /></Link>
+                                                    <Link to={`/updatePost/${data.jobId}`}><BiPencil /></Link>
                                                 </Tooltip>
                                             </li>
                                             <li className="text-[22px] text-[#FA0606]">
