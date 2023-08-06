@@ -46,6 +46,11 @@ const Header = () => {
                         {
                             user && <li><Link to="/jobList"><Button variant="contained" color="success">Job List</Button></Link></li>
                         }
+                        <li>
+                            {
+                                user && <img src={user?.photoURL} alt="" className="header-img" />
+                            }
+                        </li>
                     </ul>
                 </nav>
                 {

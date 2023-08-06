@@ -1,16 +1,20 @@
-.nav{
 
-}
 nav ul{
-   padding: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
 }
 nav ul li{
     list-style: none;
     display: inline-block;
-    margin: 0 18px;
+    margin: 0 12px;
     color: #338573;
     font-size: 16px;
     font-weight: 600;
+}
+nav ul li .header-img{
+    width: 46px;
+    border-radius: 50px;
 }
 
 @media (min-width: 320px ) and (max-width: 576px){
@@ -33,7 +37,8 @@ nav ul li{
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
     }
     nav ul{
-      text-align: center;
+        display: block;
+        text-align: center;
     }
     nav ul li{
         list-style: none;
@@ -42,5 +47,8 @@ nav ul li{
         color: #338573;
         font-size: 16px;
         font-weight: 600;
+    }
+    nav ul li .header-img{
+        margin: auto;
     }
 }

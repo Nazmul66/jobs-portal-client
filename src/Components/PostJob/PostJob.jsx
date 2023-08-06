@@ -9,20 +9,20 @@ const PostJob = () => {
     const CreatePost = (event) =>{
        event.preventDefault();
        const form = event.target;
-       const company_name = form.Company_Name.value;
-       const company_website = form.Website_link.value;
-       const company_logo = form.image.value;
-       const location = form.location.value;
-       const experience = form.experience.value;
-       const qualification = form.qualification.value;
-       const salary = form.salary.value;
-       const Experience_level = form.Experience_level.value;
-       const JobType = form.JobType.value;
-       const jobTitle = form.jobTitle.value;
-       const schedule = form.schedule.value;
-       const deadline = form.date.value;
-       const description = form.description.value;
-       const responsibility = form.responsibility.value;
+       const company_name        = form.Company_Name.value;
+       const company_website     = form.Website_link.value;
+       const company_logo        = form.image.files[0];
+       const location            = form.location.value;
+       const experience          = form.experience.value;
+       const qualification       = form.qualification.value;
+       const salary              = form.salary.value;
+       const Experience_level    = form.Experience_level.value;
+       const JobType             = form.JobType.value;
+       const jobTitle            = form.jobTitle.value;
+       const schedule            = form.schedule.value;
+       const deadline            = form.date.value;
+       const description         = form.description.value;
+       const responsibility      = form.responsibility.value;
 
        const formData = {
           position         :  jobTitle,
@@ -42,24 +42,47 @@ const PostJob = () => {
        }
        console.log(formData);
 
-       fetch("https://jobs-portal-server-iota.vercel.app/jobPost", {
-          method: "POST",
-          headers: {
-              "content-type": "application/json"
-          },
-          body: JSON.stringify(formData)
-       })
-       .then(res => res.json())
-       .then(data => {
-          console.log(data);
-          if(data.insertedId){
-            navigate('/');
-            Swal.fire({
-                icon: 'success',
-                title: 'A new job post has been Successfully',
-            })
-          }
-       })
+        // image upload file
+        const imageForm = new FormData();
+        imageForm.append("image", company_logo)
+
+        const url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_KEY}`
+
+        fetch(url, {
+         method: "POST",
+         body: imageForm,
+        })
+        .then(res => res.json())
+        .then(imageData => {
+            // console.log(imageData)
+            if(imageData.success){
+              const imageURL = imageData.data.display_url;
+            //   console.log(imageURL)
+              const { position, time, company, qualification, Experience, Location, post_Date, Salary, Working, company_website, Experience_level, Job_Description, Responsibility } = formData ;
+
+              const newItem = {position, time, company, qualification, Experience, Location, post_Date, Salary, Working, company_website, Experience_level, Job_Description, Responsibility, image : imageURL }
+
+                fetch("https://jobs-portal-server-iota.vercel.app/jobPost", {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify(newItem)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if(data.insertedId){
+                            navigate('/');
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'A new job post has been Successfully',
+                            })
+                        }
+                    })
+
+              }
+         })
 
     }
 
@@ -87,7 +110,7 @@ const PostJob = () => {
                      <div className="flex lg:flex-row flex-col items-center justify-between lg:gap-12 gap-4 mb-4">
                         <div className="mb-3 lg:w-[50%] w-full">
                             <label className="block font-medium text-[20px] mb-3">Company Logo</label>
-                            <input type="text" name="image" placeholder="Image Url" required className="w-full outline-none border-[1px] border-[#D6D6D6] rounded-md px-6 py-2" />
+                            <input type="file" name="image" accept='image/*' required="required" className='file-input file-input-bordered file-input-md w-full' />
                         </div>
                         <div className="mb-3 lg:w-[50%] w-full">
                             <label className="block font-medium text-[20px] mb-3">Job Location</label>
@@ -102,7 +125,6 @@ const PostJob = () => {
                         </div>
                         <div className="mb-3 lg:w-[50%] w-full">
                             <label className="block font-medium text-[20px] mb-3">Qualification</label>
-                            {/* <input type="text" name="qualification" placeholder="Qualification" className="w-full outline-none border-[1px] border-[#D6D6D6] rounded-md px-6 py-2" /> */}
                             <div className="selects">
                                     <select name="qualification" defaultValue={"B.S.C"} required className="border-[1px] px-5 py-2 w-full mr-5 outline-none appearance-none">
                                         <option value="" disabled>Select an option</option>

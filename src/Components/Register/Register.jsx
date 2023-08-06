@@ -12,11 +12,12 @@ const Register = () => {
 
     const handleRegister = (event) =>{
       event.preventDefault();
-      const name = event.target.username.value;
-      const email = event.target.email.value;
-      const image = event.target.image.value;
-      const pass = event.target.password.value;
-      const formData = { name, email, pass}
+      const name           = event.target.username.value;
+      const email          = event.target.email.value;
+    //   const image       = event.target.image.value;
+      const image          = event.target.image.files[0];
+      const pass           = event.target.password.value;
+      const formData       = { name, email, pass, image}
       console.log(formData)
 
       if(name === "" || email === "" || image === "" || pass === "" ){
@@ -37,46 +38,69 @@ const Register = () => {
 
       setError("");
 
-      createUser(email, pass)
-      .then( result =>{
-          const users = result.user;
-          console.log(users)
-          updateProfile(result.user, {
-            displayName: name,
-            photoURL : image,
-          })
-          .then(() =>{
-            const userInfo = {
-                 name : name || "unknown name" ,
-                 email : email,
-                 image : image
-              }
-                Swal.fire({
-                icon: 'success',
-                title: 'Register Successfully',
+      // image upload file
+       const imageForm = new FormData();
+       imageForm.append("image", image)
+     
+       const url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_KEY}`
+
+       fetch(url, {
+        method: "POST",
+        body: imageForm,
+       })
+       .then(res => res.json())
+       .then(imageData => {
+           // console.log(imageData)
+           if(imageData.success){
+             const imageURL = imageData.data.display_url;
+           //   console.log(imageURL)
+             const { name, email, pass } = formData ;
+
+                createUser(email, pass)
+                .then( result =>{
+                    const users = result.user;
+                    console.log(users)
+                    updateProfile(result.user, {
+                    displayName: name,
+                    photoURL : imageURL,
+                    })
+                    .then(() =>{
+                         const userInfo = {
+                            name : name || "unknown name" ,
+                            email : email,
+                            image : imageURL
+                         }
+                            Swal.fire({
+                            icon: 'success',
+                            title: 'Register Successfully',
+                            })
+        
+                    fetch(`https://jobs-portal-server-iota.vercel.app/userData`,{
+                        method: "POST",
+                        headers: {
+                            "content-type" : "application/json"
+                        },
+                        body: JSON.stringify(userInfo)
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                    })
+        
+                        navigate("/login")
+                  })
+        
+                })
+        
+                .catch(error =>{
+                console.log(error.message)
+                setError(error.message)
                 })
 
-            fetch(`https://jobs-portal-server-iota.vercel.app/userData`,{
-                method: "POST",
-                headers: {
-                    "content-type" : "application/json"
-                },
-                body: JSON.stringify(userInfo)
-            })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-            })
 
-                navigate("/login")
-          })
-
+             }
         })
 
-      .catch(error =>{
-        console.log(error.message)
-        setError(error.message)
-      })
        
     }
     
@@ -100,7 +124,8 @@ const Register = () => {
                         </div>
                         <div className="mb-3">
                             <label htmlFor="" className="block font-medium text-[20px] mb-3">Image </label>
-                            <input type="text" name="image" placeholder="Image URL *" className="w-full outline-none border-[1px] border-[#D6D6D6] rounded-md px-6 py-2" />
+                            <input type="file" name="image" accept='image/*' required="required" className='file-input file-input-bordered file-input-md w-full' />
+                            {/* <input type="text" name="image" placeholder="Image URL *" className="w-full outline-none border-[1px] border-[#D6D6D6] rounded-md px-6 py-2" /> */}
                         </div>
                         <div className="mb-6">
                             <label htmlFor="" className="block font-medium text-[20px] mb-3">Password</label>
